@@ -1,6 +1,7 @@
 # A22-Bicloin
 
-Distributed Systems 2020-2021, 2nd semester project
+Distributed Systems 2020-2021, 2nd semester project.
+
 Grade 18/20
 
 ## Authors
