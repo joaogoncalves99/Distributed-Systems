@@ -1,0 +1,118 @@
+//
+// Protocol buffers definition
+//
+syntax = "proto3";
+package pt.tecnico.bicloin.hub.grpc;
+import "google/type/money.proto";
+
+message PingRequest {
+  string input = 1;
+}
+
+message PingResponse {
+	string output = 1;
+}
+
+message StationInfoRequest {
+  string stationID = 1;
+}
+
+message StationInfoResponse {
+  string stationName = 1;
+  double stationLatitude = 2;
+  double stationLongitude = 3;
+  int32 stationDockCapacity = 4;
+  int32 stationPrize = 5;
+  int32 stationAvailableBikes = 6;
+  int32 requestedStatistic = 7;
+  int32 returnedStatistic = 8;
+}
+
+message UserLoginRequest {
+  string userID = 1;
+}
+
+message UserLoginResponse {
+  string userName = 1;
+  string userPhoneNumber = 2;
+}
+
+message LocateStationRequest {
+  double userLatitude = 1;
+  double userLongitude = 2;
+  int32 amountToDisplay = 3;
+}
+
+message LocateStationResponse {
+  repeated string stationID = 1;
+}
+
+message BalanceRequest {
+  string userID = 1;
+}
+
+message BalanceResponse {
+  int32 userBicloinBalance = 1;
+}
+
+message TopUpRequest {
+  string userID = 1;
+  google.type.Money userChargeAmount = 2;
+  string userPhoneNumber = 3;
+}
+
+message TopUpResponse {
+  int32 userBicloinBalance = 1;
+}
+
+message BikeUpRequest {
+  string userID = 1;
+  double userLatitude = 2;
+  double userLongitude = 3;
+  string stationID = 4;
+}
+
+message BikeUpResponse {
+  bool requestAccepted = 1;
+}
+  
+message BikeDownRequest {
+  string userID = 1;
+  double userLatitude = 2;
+  double userLongitude = 3;
+  string stationID = 4;
+}
+
+message BikeDownResponse {
+  bool requestAccepted = 1;
+}
+
+message SystemStatusRequest {
+  string input = 1;
+}
+
+message SystemStatusResponse {
+  repeated string serverPath = 1;
+  repeated string serverStatus = 2;
+}
+
+message ClearUserDataRequest {
+  string userID = 1;
+}
+
+message ClearUserDataResponse {
+  bool requestAccepted = 1;
+}
+
+service HubService {
+  rpc ping(PingRequest) returns (PingResponse);
+  rpc userLogin(UserLoginRequest) returns (UserLoginResponse);
+  rpc infoStation(StationInfoRequest) returns (StationInfoResponse);
+  rpc locateStation(LocateStationRequest) returns (LocateStationResponse);
+  rpc balance(BalanceRequest) returns (BalanceResponse);
+  rpc topUp(TopUpRequest) returns (TopUpResponse);
+  rpc bikeUp(BikeUpRequest) returns (BikeUpResponse);
+  rpc bikeDown(BikeDownRequest) returns (BikeDownResponse);
+  rpc sysStatus(SystemStatusRequest) returns (SystemStatusResponse);
+  rpc clearUserData(ClearUserDataRequest) returns (ClearUserDataResponse);
+}

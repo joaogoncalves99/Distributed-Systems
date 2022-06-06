@@ -1,0 +1,66 @@
+//
+// Protocol buffers definition
+//
+syntax = "proto3";
+package pt.tecnico.rec.grpc;
+import "google/protobuf/any.proto";
+
+message PingRequest {
+  string input = 1;
+}
+
+message PingResponse {
+	string output = 1;
+}
+
+message ReadRequest {
+  string recordName = 1;
+}
+
+message ReadResponse {
+  google.protobuf.Any recordValue = 1;
+  int32 tag = 2;
+}
+
+message WriteRequest {
+  string recordName = 1;
+  google.protobuf.Any recordValue = 2;
+  int32 tag = 3;
+}
+
+message WriteResponse {
+
+}
+
+message PrintHashMapRequest {
+
+}
+
+message PrintHashMapResponse {
+  string output = 1;
+}
+
+message DeleteAllRecordsRequest {
+
+}
+
+message DeleteAllRecordsResponse {
+
+}
+
+message DeleteRecordRequest {
+  string RecordName = 1;
+}
+
+message DeleteRecordResponse {
+
+}
+
+service RecordService {
+  rpc ping(PingRequest) returns (PingResponse);
+  rpc read(ReadRequest) returns (ReadResponse);
+  rpc write(WriteRequest) returns (WriteResponse);
+  rpc printHashMap(PrintHashMapRequest) returns (PrintHashMapResponse);
+  rpc deleteAllRecords(DeleteAllRecordsRequest) returns (DeleteAllRecordsResponse);
+  rpc deleteRecord(DeleteRecordRequest) returns (DeleteRecordResponse);
+}
